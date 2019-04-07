@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+	<head lang="eng">
+		<meta charset="utf-8">
+		<title> Prototype </title>
+		
+
+		<style>
+			* {
+				font-family:arial;
+			}
+
+			@media print {
+				* {
+				   -webkit-print-color-adjust: exact; 
+				   print-color-adjust: exact;
+				}
+
+				.printSplit {
+				    page-break-before: always; // Always start new articles on a new page
+				  }
+
+				.col-p{
+					color:#B3B6C4;
+					background-color: #B3B6C4;
+					border-radius: 10px;
+				}
+				.priorityGreen {
+					background-color: green;
+					padding:10px;
+					border-radius: 30px;
+					width:90%;
+				}
+
+				.priorityOne {
+					background-color: red;
+					padding:10px;
+					border-radius: 30px;
+					width:90%;
+					word-wrap:break-word;
+				}
+
+				.priorityTwo {
+					background-color: orange;
+					padding:10px;
+					border-radius: 30px;
+					width:90%;
+				}
+
+				.priorityThree {
+					background-color: yellow;
+					padding:10px;
+					border-radius: 30px;
+					width:90%;
+				}
+			}
+
+			.row {
+				font-family:arial;
+				width: ;
+			}
+
+			.col {
+				display: inline-block;
+				padding: 5px;
+				text-align: center;
+			}
+
+			.col-p {
+				display: inline-block;
+				padding: 5px;
+				text-align: center;
+				color: #B3B6C4;
+				background-color: #B3B6C4;
+				border-radius: 10px;
+			}
+
+			.priorityGreen {
+				background-color: green;
+				padding:10px;
+				border-radius: 30px;
+				width:90%;
+			}
+
+			.priorityOne {
+				background-color: red;
+				padding:10px;
+				border-radius: 30px;
+				width:90%;
+				word-wrap:break-word;
+			}
+
+			.priorityTwo {
+				background-color: orange;
+				padding:10px;
+				border-radius: 30px;
+				width:90%;
+			}
+
+			.priorityThree {
+				background-color: yellow;
+				padding:10px;
+				border-radius: 30px;
+				width:90%;
+			}
+
+			#overlay {
+			  position: fixed; /* Sit on top of the page content */
+			  display: none; /* Hidden by default */
+			  width: 100%; /* Full width (cover the whole page) */
+			  height: 100%; /* Full height (cover the whole page) */
+			  top: 0; 
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  background-color: rgba(0,0,0,0.9); /* Black background with opacity */
+			  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+			  cursor: pointer; /* Add a pointer on hover */
+			}
+
+			#text{
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  font-size: 13px;
+			  font-family:arial;
+			  color: white;
+			  transform: translate(-50%,-50%);
+			  -ms-transform: translate(-50%,-50%);
+			}
+
+			.nav {
+
+			}
+
+			h1 {
+				float:left;
+			}
+
+			p{
+				
+			}
+
+
+			.instructions {
+				padding:10px;
+				border-radius:50px;
+				border-color:white;
+				background-color:#09C6F0;
+				float:right;
+				margin:0px;
+			}
+
+			
+
+		</style>
+	</head>
+	<body>
+		<div class="navbar">
+			<h1>Productivity Re:Imagined</h1>
+			<br>
+			<p>A weekly organisational tool.</p>
+
+			
+		</div>
+				
+		<br>
+		<br>
+		<br>
+		<div>
+			<h2>Introduction</h2>
+			<p>Productivity re:imagined is a project based around your weekly and daily organisation. You should fill this in over the weekend for the forthcoming week.</p>
+		</div>
+		<br>
+		<br>
+		<div class="wrapper">
+			<h2> Task Entry </h2>
+			<h3>Your first step is organising your weeks tasks into four groups.</h3>
+			<ul>
+				<li>Red tasks should be your <b>critical tasks.</b> For example report deadlines, tax returns etc.</li>
+				<li>Orange tasks should be your next step down. So tasks that are <b>required</b> but not urgent.</li>
+				<li>Yellow tasks should be the <b>remaining tasks</b> within your week. These are non pressing tasks.</li>
+				<li>Green tasks are <b>desirable</b> tasks you want to do more of, or take up in your free time.</li>
+			</ul>
+			<br>
+			<br>
+			<br>
+			<div class="printSplit">
+				<div class="priorityOne">
+					<b><p>Add critical tasks</b><i>(max 15)</i><b>:</b></p> <input id="p1Add" type="text">
+					<button id="submit" type="submit" onClick="pushP1Task()">Add</button> <br />
+					<!--<p id="demo"></p> -->
+					 <p id="demo2"></p> 
+				</div>
+				<br>
+				<div class="priorityTwo">
+					<b><p>Add required tasks:</p></b> <input id="p2Add" type="text">
+					<button id="submit" type="submit" onClick="pushP2Task()">Add</button> <br />
+					<!--<p id="demo"></p> -->
+					 <p id="demo3"></p> 
+				</div>
+				<br>
+				<div class="priorityThree">
+					<b><p>Add remaining tasks:</p></b> <input id="p3Add" type="text">
+					<button id="submit" type="submit" onClick="pushP3Task()">Add</button> <br />
+					<!--<p id="demo"></p> -->
+					 <p id="demo4"></p> 
+				</div>
+				<br>
+				<div class="priorityGreen">
+					<b><p>Add desirable tasks:</p></b> <input id="greenAdd" type="text">
+					<button id="submit" type="button" onClick="pushGreenTask()">Add</button> <br />
+					<!--<p id="demo"></p> -->
+					 <p id="demo5"></p> 
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="printSplit">
+				<h3>Filling out your weekly calendar</h3>
+				<p>Within your weekly calendar you can click on the grey squares to cycle through your task colours. The tasks you listed are to be spread across the week. Please follow these steps when filling out the calendar to the highest possible degree of accuracy.</p>
+				<ol>
+				  <li>Enter your sleep hours as black tiles. We recommend around 7-9 hours.</li>
+				  <li>Add your lunch hour as green.</li>
+				  <li>Any time spent commuting etc can remain grey.</li>
+				  <li>Enter your critical tasks. Any critical tasks related to work must be placed within the first 3 hours of your working day (e.g 9-11am in most cases). Try and avoid critical tasks outside of your work day.</li>
+				  <li>Enter your required tasks. Again try and restrain these to within your work hours and spread them evenly across your days.</li>
+				  <li>Enter your remaining tasks. Consider which of these are entirely necessary to go into your calendar. Spread these over your week, but try and group them within your days.</li>
+				  <li><b>Your remaining squares can be made green.</b></li>
+				  <li>Re-organise any tasks you can to make your desirable hours as long as possible.</li>
+				  <li>Remember to print/screenshot the page before quitting or refreshing.<b> CTRL + P, CMD + P.</b><br>For this prototype please change elements on your calendar manually using either highlighters or a pen to code colours (R = RED, O = ORANGE etc.). Cross of tasks manually too.</p></li>
+				</ol>
+				<br>
+				<br>
+				<br>
+				<br>
+				
+			</div>
+			<div class="printSplit">
+				<h2>Weekly calendar</h2>
+				<div class="row">
+				  <div class="col" id="pOne1">01</div>
+				  <div class="col" id="pOne2">02</div>
+				  <div class="col" id="pOne3">03</div>  
+				  <div class="col" id="pOne4">04</div>
+				  <div class="col" id="pOne5">05</div>
+				  <div class="col" id="pOne6">06</div>  
+				  <div class="col" id="pOne7">07</div>
+				  <div class="col" id="pOne8">08</div>
+				  <div class="col" id="pOne9">09</div>  
+				  <div class="col" id="pOne10">10</div>
+				  <div class="col" id="pOne11">11</div>
+				  <div class="col" id="pOne12">12</div>  
+				  <div class="col" id="pOne13">13</div>
+				  <div class="col" id="pOne14">14</div>
+				  <div class="col" id="pOne15">15</div>  
+				  <div class="col" id="pOne16">16</div>
+				  <div class="col" id="pOne17">17</div>
+				  <div class="col" id="pOne18">18</div> 
+				  <div class="col" id="pOne19">19</div>
+				  <div class="col" id="pOne20">20</div>
+				  <div class="col" id="pOne21">21</div>  
+				  <div class="col" id="pOne22">22</div>
+				  <div class="col" id="pOne23">23</div>
+				  <div class="col" id="pOne24">24</div>
+				</div>
+
+				<h4>Monday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>	
+				<h4>Tuesday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>
+				<h4>Wednesday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>	
+				<h4>Thursday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>
+				<h4>Friday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>	
+				<h4>Saturday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>
+				<h4>Sunday</h4>
+				<div class="row">
+				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
+				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
+				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
+				  <div class="col-p" id="pOne4" onclick="setColor(this)">04</div>
+				  <div class="col-p" id="pOne5" onclick="setColor(this)">05</div>
+				  <div class="col-p" id="pOne6" onclick="setColor(this)">06</div>  
+				  <div class="col-p" id="pOne7" onclick="setColor(this)">07</div>
+				  <div class="col-p" id="pOne8" onclick="setColor(this)">08</div>
+				  <div class="col-p" id="pOne9" onclick="setColor(this)">09</div>  
+				  <div class="col-p" id="pOne10" onclick="setColor(this)">10</div>
+				  <div class="col-p" id="pOne11" onclick="setColor(this)">11</div>
+				  <div class="col-p" id="pOne12" onclick="setColor(this)">12</div>  
+				  <div class="col-p" id="pOne13" onclick="setColor(this)">13</div>
+				  <div class="col-p" id="pOne14" onclick="setColor(this)">14</div>
+				  <div class="col-p" id="pOne15" onclick="setColor(this)">15</div>  
+				  <div class="col-p" id="pOne16" onclick="setColor(this)">16</div>
+				  <div class="col-p" id="pOne17" onclick="setColor(this)">17</div>
+				  <div class="col-p" id="pOne18" onclick="setColor(this)">18</div> 
+				  <div class="col-p" id="pOne19" onclick="setColor(this)">19</div>
+				  <div class="col-p" id="pOne20" onclick="setColor(this)">20</div>
+				  <div class="col-p" id="pOne21" onclick="setColor(this)">21</div>  
+				  <div class="col-p" id="pOne22" onclick="setColor(this)">22</div>
+				  <div class="col-p" id="pOne23" onclick="setColor(this)">23</div>
+				  <div class="col-p" id="pOne24" onclick="setColor(this)">24</div>
+				</div>
+			</div>	
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div class="wrapper">	
+
+		<script>
+			var backgrounds = ["#80C63F", "red", "orange", "yellow", "black", "#B3B6C4"]; 
+
+			function setColor(el) { 
+			    el.colorIdx = el.colorIdx || 0;
+			    el.colorIdx2 = el.colorIdx2 || 0; 
+			    el.style.backgroundColor = backgrounds[el.colorIdx++ % backgrounds.length]; 
+			    el.style.color = backgrounds[el.colorIdx2++ % backgrounds.length];
+			} ;
+
+
+
+
+			var p1Tally = 0;
+			var p1Inputs = [];
+			var p2Inputs = [];
+			var p3Inputs = [];
+			var greenInputs = [];
+
+			var submit = document.getElementById("submit");
+//			var pOne1 = document.getElementById('pOne1');
+
+			
+			function pushGreenTask(){
+				var greenTask = document.getElementById("greenAdd").value;
+
+				greenInputs.push(greenTask);
+				document.getElementById("demo5").innerHTML = greenInputs;
+				document.getElementById("greenAdd").value = '';
+			};
+			
+
+			function pushP1Task(){
+				var p1Task = document.getElementById("p1Add").value;
+
+				p1Inputs.push(p1Task);
+				document.getElementById("demo2").innerHTML = p1Inputs;
+				document.getElementById("p1Add").value = '';
+				//document.getElementById("demo").innerHTML = p1Tally;
+				//p1Tally += 1;
+			};
+
+			function pushP2Task(){
+				var p2Task = document.getElementById("p2Add").value;
+
+				p2Inputs.push(p2Task);
+				document.getElementById("demo3").innerHTML = p2Inputs;
+				document.getElementById("p2Add").value = '';
+			};
+
+			function pushP3Task(){
+				var p3Task = document.getElementById("p3Add").value;
+
+				p3Inputs.push(p3Task);
+				document.getElementById("demo4").innerHTML = p3Inputs;
+				document.getElementById("p3Add").value = '';
+			};
+
+			function on() {
+			  document.getElementById("overlay").style.display = "block";
+			}
+
+			function off() {
+			  document.getElementById("overlay").style.display = "none";
+			}
+		
+
+			
+
+//				if(p1Tally == 1){
+//					document.getElementById("pOne1").style.backgroundColor = "red";
+//				} else if(p1Tally == 2){
+//					document.getElementById("pOne2").style.backgroundColor = "red";
+//				} else if(p1Tally == 3){
+//					document.getElementById("pOne3").style.backgroundColor = "red";
+//				} else if (p1Tally > 3){
+//					document.getElementById("pOne1").style.backgroundColor = "red";
+//					document.getElementById("pOne2").style.backgroundcolor = "red";
+//					document.getElementById("pOne3").style.backgroundColor = "red";
+//				}else {
+//					document.getElementById("pOne1").style.backgroundColor = "#80C63F";
+//					document.getElementById("pOne2").style.backgroundColor = "#80C63F";
+//					document.getElementById("pOne3").style.backgroundColor = "#80C63F";
+//				};
+//			};
+
+
+		</script>
+
+
+
+	</body>
+</html>
