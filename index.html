@@ -6,6 +6,7 @@
 		
 
 		<style>
+		/* All CSS and printing media queries */
 			* {
 				font-family:arial;
 			}
@@ -173,6 +174,8 @@
 		</div>
 		<br>
 		<br>
+
+		<!-- instructions -->	
 		<div class="wrapper">
 			<h2> Task Entry </h2>
 			<h3>Your first step is organising your weeks tasks into four groups.</h3>
@@ -185,38 +188,39 @@
 			<br>
 			<br>
 			<br>
+
+			<!-- print split class to force line break on print. -->
 			<div class="printSplit">
+				<!-- task entry boxes -->
 				<div class="priorityOne">
 					<b><p>Add critical tasks</b><i>(max 15)</i><b>:</b></p> <input id="p1Add" type="text">
 					<button id="submit" type="submit" onClick="pushP1Task()">Add</button> <br />
-					<!--<p id="demo"></p> -->
+					<!-- demo 2 displays global variable that stores tasks entered. -->
 					 <p id="demo2"></p> 
 				</div>
 				<br>
 				<div class="priorityTwo">
 					<b><p>Add required tasks:</p></b> <input id="p2Add" type="text">
 					<button id="submit" type="submit" onClick="pushP2Task()">Add</button> <br />
-					<!--<p id="demo"></p> -->
 					 <p id="demo3"></p> 
 				</div>
 				<br>
 				<div class="priorityThree">
 					<b><p>Add remaining tasks:</p></b> <input id="p3Add" type="text">
 					<button id="submit" type="submit" onClick="pushP3Task()">Add</button> <br />
-					<!--<p id="demo"></p> -->
 					 <p id="demo4"></p> 
 				</div>
 				<br>
 				<div class="priorityGreen">
 					<b><p>Add desirable tasks:</p></b> <input id="greenAdd" type="text">
 					<button id="submit" type="button" onClick="pushGreenTask()">Add</button> <br />
-					<!--<p id="demo"></p> -->
 					 <p id="demo5"></p> 
 				</div>
 			</div>
 			<br>
 			<br>
 			<br>
+			<!-- instructions -->
 			<div class="printSplit">
 				<h3>Filling out your weekly calendar</h3>
 				<p>Within your weekly calendar you can click on the grey squares to cycle through your task colours. The tasks you listed are to be spread across the week. Please follow these steps when filling out the calendar to the highest possible degree of accuracy.</p>
@@ -237,8 +241,10 @@
 				<br>
 				
 			</div>
+			<!-- Weekly calendar entry -->
 			<div class="printSplit">
 				<h2>Weekly calendar</h2>
+				<!-- hours of the day. -->
 				<div class="row">
 				  <div class="col" id="pOne1">01</div>
 				  <div class="col" id="pOne2">02</div>
@@ -266,8 +272,10 @@
 				  <div class="col" id="pOne24">24</div>
 				</div>
 
+				<!-- days of the week. -->
 				<h4>Monday</h4>
 				<div class="row">
+				<!-- onClick function cycles through colours. See setColor function in JS. -->
 				  <div class="col-p" id="pOne1" onclick="setColor(this)">01</div>
 				  <div class="col-p" id="pOne2" onclick="setColor(this)">02</div>
 				  <div class="col-p" id="pOne3" onclick="setColor(this)">03</div>  
@@ -464,20 +472,27 @@
 			<br>
 			<br>
 		</div class="wrapper">	
-
+		<!-- javascript -->
 		<script>
+			//global array storing colours for the squares to cycle through on click.
 			var backgrounds = ["#80C63F", "red", "orange", "yellow", "black", "#B3B6C4"]; 
 
-			function setColor(el) { 
+			//colour cycle function. el refers to element. These are called on as setColor(this), in HTML.
+			function setColor(el) {
+				//Call's value zero as default from array 'backgrounds'.
+				//colorIdx is for background color
+				//colorIdx2 is for font color.
 			    el.colorIdx = el.colorIdx || 0;
 			    el.colorIdx2 = el.colorIdx2 || 0; 
+			    //cycles through background array by calling colour's using the length.
 			    el.style.backgroundColor = backgrounds[el.colorIdx++ % backgrounds.length]; 
 			    el.style.color = backgrounds[el.colorIdx2++ % backgrounds.length];
 			} ;
 
 
 
-
+			//global array's storing tasks entered by user.
+			//p1Tally is a testing feature you can call upon if you want to check the add button is working.
 			var p1Tally = 0;
 			var p1Inputs = [];
 			var p2Inputs = [];
@@ -487,24 +502,26 @@
 			var submit = document.getElementById("submit");
 //			var pOne1 = document.getElementById('pOne1');
 
-			
+			//Push function for task entry. Used as the onClick function of the add button.
 			function pushGreenTask(){
+				//fetches the input field by id and stores it in a local variable.
 				var greenTask = document.getElementById("greenAdd").value;
 
+				//Pushes that local variable to global array.
 				greenInputs.push(greenTask);
+				//fetches the <p> element of task entry divs and tells it to display global array.
 				document.getElementById("demo5").innerHTML = greenInputs;
+				//Clears the input field and therefore the local variable.
 				document.getElementById("greenAdd").value = '';
 			};
 			
-
+			//All task entries are the same. Refer to pushGreenTask() function.
 			function pushP1Task(){
 				var p1Task = document.getElementById("p1Add").value;
 
 				p1Inputs.push(p1Task);
 				document.getElementById("demo2").innerHTML = p1Inputs;
 				document.getElementById("p1Add").value = '';
-				//document.getElementById("demo").innerHTML = p1Tally;
-				//p1Tally += 1;
 			};
 
 			function pushP2Task(){
@@ -523,13 +540,17 @@
 				document.getElementById("p3Add").value = '';
 			};
 
-			function on() {
-			  document.getElementById("overlay").style.display = "block";
-			}
 
-			function off() {
-			  document.getElementById("overlay").style.display = "none";
-			}
+
+
+
+//			function on() {
+//			  document.getElementById("overlay").style.display = "block";
+//			}
+//
+//			function off() {
+//			  document.getElementById("overlay").style.display = "none";
+//			}
 		
 
 			
